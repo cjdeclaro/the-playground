@@ -11,10 +11,11 @@
 </head>
 
 <body data-bs-theme="dark">
-  <div class="h1 z-1 text-center position-fixed top-0 w-100 pt-4">The Playground</div>
+  <div class="h1 z-3 text-center position-fixed top-0 w-100 pt-4">The Playground</div>
 
-  <div class="z-1 position-fixed bottom-0 w-100 mb-4 px-4">
-    <div class="container py-3 d-flex flex-row justify-content-around align-items-center bg-body border shadow rounded-5">
+  <div class="z-3 position-fixed bottom-0 w-100 mb-4 px-4">
+    <div
+      class="container py-3 d-flex flex-row justify-content-around align-items-center bg-body border shadow rounded-5">
       <div class="btn btn-secondary" onclick="spawnCharacter()">
         Add
       </div>
@@ -22,6 +23,9 @@
   </div>
 
   <div class="playground container-fluid" id="playground">
+  </div>
+
+  <div id="infoCard" class="infoCard">
   </div>
 
   <script src="js/script.js"></script>
