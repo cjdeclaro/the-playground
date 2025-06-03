@@ -33,6 +33,24 @@ function spawnCharacter() {
   character.dataset.personality = JSON.stringify(personality);
   character.style.backgroundColor = personality.color;
 
+  character.addEventListener("click", () => {
+    const info = JSON.parse(character.dataset.personality);
+    const talkedList = Array.from(character.talkedTo || []);
+    const infoCard = document.getElementById("infoCard");
+
+    infoCard.innerHTML = `
+    <strong>${info.name}</strong><br/>
+    Color: ${info.color}<br/>
+    Hat: ${info.hasHat ? "Yes" : "No"}<br/>
+    Speed: ${info.speed.toFixed(2)}s<br/>
+    Money: ₱${info.money}<br/>
+    <br/>
+    <u>Talked To:</u><br/>
+    ${talkedList.length ? talkedList.join("<br/>") : "<i>None yet</i>"}
+  `;
+    infoCard.style.display = "block";
+  });
+
   if (personality.hasHat) {
     const hat = document.createElement("div");
     hat.classList.add("hat");
@@ -126,13 +144,13 @@ function checkForNearbyCharacters(character) {
       const p1 = JSON.parse(character.dataset.personality);
       const p2 = JSON.parse(other.dataset.personality);
 
-      speak(character, `${p1.name}: ${p1.openingStatement}`, 2500);
-      speak(other, `${p2.name}: ${p2.openingStatement}`, 2500);
+      speak(character, `${p1.name}: ${p1.openingStatement}`, 2500, p2.name);
+      speak(other, `${p2.name}: ${p2.openingStatement}`, 2500, p1.name);
     }
   });
 }
 
-function speak(character, message, pauseDuration) {
+function speak(character, message, pauseDuration, partnerName = null) {
   if (character.dataset.paused === "true") return;
 
   character.dataset.paused = "true";
@@ -149,6 +167,11 @@ function speak(character, message, pauseDuration) {
   setTimeout(() => {
     document.getElementById("playground").appendChild(bubble);
   }, 1000);
+
+  // Save conversation partner
+  if (partnerName) {
+    character.talkedTo.add(partnerName);
+  }
 
   setTimeout(() => {
     bubble.remove();
