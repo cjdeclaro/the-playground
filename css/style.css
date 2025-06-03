@@ -1,67 +1,267 @@
-.playground {
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.controls {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 20px;
+  margin: 0 5px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+#playground {
   position: relative;
+  width: 100%;
+  min-height: 500px;
   height: 100dvh;
+  background: rgba(255, 255, 255, 0.1);
+  /* border-radius: 20px; */
+  backdrop-filter: blur(10px);
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  overflow: hidden;
+  /* box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); */
 }
 
 .character {
+  position: absolute;
   width: 50px;
   height: 50px;
-  position: absolute;
-  border-radius: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
-.info-card {
-  display: none;
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  width: 200px;
-  padding: 10px;
-  color: black;
-  background: #f9f9f9;
-  border: 2px solid #333;
-  border-radius: 8px;
-  font-family: sans-serif;
-  font-size: 14px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 3;
+.character:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.character.happy {
+  animation: bounce 2s infinite;
+}
+
+.character.angry {
+  animation: shake 0.5s infinite;
+}
+
+.character.sad {
+  animation: droop 3s infinite;
+}
+
+.character.excited {
+  animation: spin 1s infinite;
+}
+
+.character.anxious {
+  animation: jitter 0.3s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-3px);
+  }
+
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes droop {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes jitter {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(1px, 1px);
+  }
+
+  50% {
+    transform: translate(-1px, 1px);
+  }
+
+  75% {
+    transform: translate(1px, -1px);
+  }
 }
 
 .hat {
   position: absolute;
-  width: 20px;
-  height: 10px;
-  background: black;
-  top: -10px;
-  left: 15px;
-  border-radius: 2px;
-  z-index: 1;
+  width: 30px;
+  height: 20px;
+  background: #333;
+  top: -15px;
+  left: 10px;
+  border-radius: 50% 50% 0 0;
 }
 
 .speech {
   position: absolute;
-  background: white;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  padding: 3px 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 15px;
   font-size: 12px;
   z-index: 2;
-  white-space: nowrap;
-  pointer-events: none;
-  animation: fadeOut 4s forwards;
-  color: black;
+  max-width: 200px;
+  word-wrap: break-word;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.5s ease;
 }
 
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
+@keyframes fadeInUp {
+  from {
     opacity: 0;
+    transform: translateY(10px);
   }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.thought {
+  position: absolute;
+  background: rgba(128, 0, 128, 0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  z-index: 2;
+  max-width: 150px;
+  font-style: italic;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: fadeInUp 0.5s ease;
+}
+
+#infoCard {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  display: none;
+  max-width: 300px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  z-index: 3;
+}
+
+.mood-indicator {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.relationship-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin: 2px 0;
+  overflow: hidden;
+}
+
+.relationship-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
 }
